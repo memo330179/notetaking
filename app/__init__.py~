@@ -1,0 +1,22 @@
+import os
+from flask import Flask, g
+from app.models import *
+
+app = Flask(__name__)
+
+@app.before_request
+def before_request():
+    g.db = db
+    g.db.connect()
+    
+@app.after_request
+def after_request(response):
+    g.db.close()
+    return response
+    
+
+from app import index
+from app import register
+
+
+

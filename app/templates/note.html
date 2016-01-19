@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{note.title | safe }}</h2>
+<h3>{{note.course | safe}}</h3>
+<p>{{note.key_point | safe}}</p>
+<p>{{note.notes | safe}}</p>
+<p>{{note.summary| safe}}</p>
+{% endblock %}
+

@@ -1,18 +1,14 @@
-from peewee import *
+from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
-db = SqliteDatabase('notes.db')
 
-class BaseModel(Model):
-    class Meta:
-        database = db 
 
-class User(BaseModel):
-    username      = CharField()
-    password      = CharField()
-    email         = CharField()
-    authenticated = BooleanField()
-    
+class User(db.Model):
+    id            = db.Column(db.Integer, primary_key = True)
+    username      = db.Column('username', db.String(20), unique=True, index=True)
+    email         = db.Column('email', db.String(120), index=True, unique=True)
+    notes         = db.relationship('Note', backref='username', lazy='dynamic')
+    pw_hash       = db.Column('password', db.String())
     def __init__(self, username, password, email):
         self.username = username
         self.set_password(password)
@@ -24,12 +20,11 @@ class User(BaseModel):
     
     
     def get_id(self):
-        """Return the email address"""
-        return self.email
+        return str(self.id)
         
     def is_authenticated(self):
         """Return True if the user is authenticated"""
-        return self.authenticated
+        return True
         
     def is_anonymous(self):
         return False
@@ -43,25 +38,26 @@ class User(BaseModel):
     def __repr__(self):
         return '<User %r>' % (self.username)
     
-    class Meta:
-        order_by = ('username',)
         
     
         
         
-class Relationship(BaseModel):
-    from_user = ForeignKeyField(User, related_name='relationships')
-    to_user   = ForeignKeyField(User, related_name='related_to')
-    
-    class Meta:
-        indexes = (
-            (('from_user', 'to_user'), True),
-            )
             
-class Note(BaseModel):
-    user      = ForeignKeyField(User)
-    title     = CharField()
-    course    = CharField()
-    key_point = TextField()
-    notes     = TextField()
-    summary   = TextField()
+class Note(db.Model):
+    user_id   = db.Column(db.Integer, db.ForeignKey('user.id'))
+    id        = db.Column(db.Integer, primary_key = True)
+    title     = db.Column(db.String())
+    course    = db.Column(db.String())
+    key_point = db.Column(db.String())
+    notes     = db.Column(db.String())
+    summary   = db.Column(db.String())
+    
+    def __init__(self, user_id, title, course, key_point, notes, summary):
+        self.user_id   = user_id
+        self.title     = title
+        self.course    = course
+        self.key_point = key_point
+        self.notes     = notes
+        self.summary   = summary
+    def __repr__(self):
+        return '<Note %r>' % (self.title)
