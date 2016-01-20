@@ -7,4 +7,4 @@ from flask.ext.login import login_required
 def note(id):
     note = models.Note.query.get(id)
     
-    return render_template("note.html", note = note,)
+    return render_template("note.html", note = note, user= g.user,)

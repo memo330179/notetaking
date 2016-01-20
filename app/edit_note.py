@@ -17,4 +17,4 @@ def edit_note(id):
     note.summary   = request.form['summary']
     db.session.commit()
     
-    return render_template("edit_note.html", note = note,)
+    return render_template("edit_note.html", note = note, user = g.user,)

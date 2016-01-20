@@ -6,7 +6,7 @@ from flask.ext.login import login_required
 @login_required
 def new_note():
     if request.method == 'GET':
-        return render_template('new_note.html')
+        return render_template('new_note.html', user = g.user, )
     title     =  request.form['title']
     course    =  request.form['course']
     key_point =  request.form['key_point']
