@@ -7,7 +7,7 @@ from flask.ext.login import login_required
 def edit_note(id):
     if request.method == 'GET':
         note = models.Note.query.get(id)
-        return render_template('edit_note.html', note = note,)
+        return render_template('edit_note.html', note = note, user = g.user,)
     note = models.Note.query.get(id)
     
     note.title     = request.form['title']

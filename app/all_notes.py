@@ -6,4 +6,4 @@ from flask.ext.login import login_required, current_user
 @login_required
 def all_notes():
     notes = models.Note.query.filter_by(user_id = g.user.id).all()
-    return render_template("all_notes.html", notes = notes, )
+    return render_template("all_notes.html", notes = notes, user = g.user,)
