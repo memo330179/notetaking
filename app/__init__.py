@@ -16,6 +16,8 @@ from app import login_logout
 from app import  new_note
 from app import all_notes
 from app import note
+from app import edit_note
+
 login_manager.login_view = 'login'
 #from app import flask_log_in
 @login_manager.user_loader
