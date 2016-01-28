@@ -1,9 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>{{note.title | safe }}</h2>
-<h3>{{note.course | safe}}</h3>
-<p>{{note.key_point | safe}}</p>
-<p>{{note.notes | safe}}</p>
-<p>{{note.summary| safe}}</p>
+<div class="container">
+  <div class="text-center"> 
+    <h1>{{note.title | safe }}</h1>
+  </div>
+  <div>
+    <p>{{note.course | safe}}</p>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <h2>Key Points</h2>
+      {{ note.key_point | safe}}
+      <a class="btn btn-primary btn-xs" href="edit/key_points/{{note.id}}" role="button">Edit Key Points</a>
+    </div>
+    <div id="content" class="col-md-6">
+      <h2>Notes</h2>
+      <p>{{note.notes | safe}}</p>
+      <a class="btn btn-primary btn-xs" href="edit/note/{{note.id}}" role="button">Edit Notes</a>
+    </div>
+  </div>
+  <div>
+    <h2 class="text-center">Summary</h2>
+  {{note.summary| safe}}
+<a class="btn btn-primary btn-xs" href="edit/summary/{{note.id}}" role="button">Edit Summary</a>
+  </div>
+</div>
 {% endblock %}
 

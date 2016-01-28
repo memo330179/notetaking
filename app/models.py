@@ -1,4 +1,5 @@
 from app import db
+import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -44,13 +45,14 @@ class User(db.Model):
         
             
 class Note(db.Model):
-    user_id   = db.Column(db.Integer, db.ForeignKey('user.id'))
-    id        = db.Column(db.Integer, primary_key = True)
-    title     = db.Column(db.String())
-    course    = db.Column(db.String())
-    key_point = db.Column(db.String())
-    notes     = db.Column(db.String())
-    summary   = db.Column(db.String())
+    user_id    = db.Column(db.Integer, db.ForeignKey('user.id'))
+    id         = db.Column(db.Integer, primary_key = True)
+    title      = db.Column(db.String())
+    course     = db.Column(db.String())
+    key_point  = db.Column(db.String())
+    notes      = db.Column(db.String())
+    summary    = db.Column(db.String())
+    date_added = db.Column(db.Date, default=datetime.date.today())
     
     def __init__(self, user_id, title, course, key_point, notes, summary):
         self.user_id   = user_id

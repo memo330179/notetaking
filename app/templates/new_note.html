@@ -1,31 +1,23 @@
 {% extends "base.html"%}
 {% block content %}
-<script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script></script>
-<form action='' method=post>
-  <h2>New Note</h2>
-  <div>
-    <div>
-      <input type='text' id='title 'name='title' placeholder="Enter title" value="{{ request.form.title }}" required></textarea>
-    </div>
-  </div>
-  <div> 
-    <input type='text' id='course' name='course' placeholder="Enter course" value="{{ request.form.course }}" required></textarea>
-  </div>
+<script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
+<div class="container">
+<form role="form" action='' method=post>
+  <h2 class="text-center">New Note</h2>
+  <div class="form-group">
+      <input class="form-control" type='text' id='title 'name='title' placeholder="Enter title" value="{{ request.form.title }}" required>
+    <input class="form-control" type='text' id='course' name='course' placeholder="Enter notebook" value="{{ request.form.course }}" required>
    <div> 
-     <textarea type='text' id='key_point' name='key_point' placeholder="Enter key points" value="{{ request.form.key_point }}" required></textarea>
+    <textarea type='text' id='notes' name='notes' placeholder="Enter Notes" value="{{ request.form.notes }}" required></textarea>
   </div>
-  <div> 
-    <textarea type='text' id='notes' name='notes' placeholder="Enter notes" value="{{ request.form.notes }}" required><textarea></textarea>
   </div>
-  <div> 
-    <textarea type='text' id='summary' name='summary' placeholder="Enter summary" value="{{ request.form.summary }}" required></textarea>
-  </div>
+
+
   <script>
 
-    CKEDITOR.replace('key_point');
     CKEDITOR.replace('notes');
-    CKEDITOR.replace('summary');
   </script>
   <button type='submit' >save</button>
 </form>
+</div>
 {% endblock %}

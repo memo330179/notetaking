@@ -1,7 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
+<div class='container'>
+  <table style="width:100%">
+    <tr>
+      <th>Note Title</th>
+      <th>Notebook</th>
+      <th>Date Added</th>
+      <th>Delete Note</th>
+    </tr>
 {% for note in notes %}
-<a href="note/{{note.id}}">{{ note.title }}</a>
+<tr>
+  <td>
+     <a href="note/{{note.id}}">{{ note.title }}</a>
+  </td>
+  <td>
+    <p>{{ note.course }}</p>
+  </td>
+  <td>
+    <p>{{note.date_added}}</p>
+  </td>
+  <td>
+    <a href='/delete/{{note.id}}' class="btn btn-danger">Delete</a>
+  </td>
+</tr>
 {% endfor%}
+</table>
+</div>
 
 {% endblock%}
