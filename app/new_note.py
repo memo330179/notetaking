@@ -6,12 +6,13 @@ from flask.ext.login import login_required
 @login_required
 def new_note():
     if request.method == 'GET':
-        return render_template('new_note.html', user = g.user, )
+        notebooks = models.Notebook.query.filter_by(user_id = g.user.id).all()
+        return render_template('new_note.html', user = g.user, notebooks = notebooks,)
     title     =  request.form['title']
-    course    =  request.form['course']
     notes     =  request.form['notes']
-    user      =  models.User.query.filter_by(username=g.user.username).first()
-    note = models.Note(user.id, title, course,"", notes,"")
+    notebook_id  =  request.form['notebook']
+    user   =  models.User.query.filter_by(username=g.user.username).first()
+    note = models.Note(title,"", notes,"", notebook_id, g.user.id)
     db.session.add(note)
     db.session.commit()
     flash('Note succesfully added')

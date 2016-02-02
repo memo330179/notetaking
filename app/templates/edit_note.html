@@ -9,9 +9,12 @@
       <input class="form-control" type='text' id='title 'name='title' placeholder="Enter title" value="{{ note.title | safe}}" required>
     </div>
   </div>
-  <div> 
-    <input class="form-control" type='text' id='course' name='course' placeholder="Enter course" value="{{ note.course | safe}}" required>
-  </div>
+  <select class="form-control" name="notebook" id ="notebook">
+        {% for notebook in notebooks %}
+        <option  value="{{ notebook.id }}">{{ notebook.name }}</option>
+              {% endfor %}
+  </select>
+
   <div> 
     <textarea type='text' id='notes' name='notes' placeholder="Enter notes" value="{{ request.form.notes }}" required>{{ note.notes | safe }}</textarea>
   </div>

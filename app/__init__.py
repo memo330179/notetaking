@@ -18,6 +18,8 @@ from app import all_notes
 from app import note
 from app import edit_note
 from app import delete
+from app import new_notebook
+from app import new_task
 login_manager.login_view = 'login'
 #from app import flask_log_in
 @login_manager.user_loader

@@ -6,6 +6,7 @@ from werkzeug.security import check_password_hash
 @app.before_request
 def before_request():
     g.user = current_user
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -19,7 +20,8 @@ def login():
     if registered_user and registered_user.check_password(password):
         login_user(registered_user)
         flash('Logged in successfully')
-        return redirect(url_for('index'))
+        return redirect(url_for('all_notes'))
+    return "try again"
 
 @app.route('/logout')
 def logout():
