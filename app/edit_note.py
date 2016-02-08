@@ -37,12 +37,14 @@ def edit_summary(id):
 @login_required
 def edit_key_points(id):
     note = models.Note.query.get(id)
-    if note is None or note.user_id != g.user.id:
+
+    if note is not None or note.user_id != g.user.id:
         return redirect(url_for('all_notes'))
     if request.method == 'GET':
         return render_template('edit_key_point.html', note = note, user = g.user,)
 
     note.key_point   = request.form['key_point']
     db.session.commit()
+
 
     return redirect(url_for('note', id=id))
