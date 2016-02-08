@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "tasks.html" %}
+<div class='container'>
+  {% for notebook in notebooks %}
+  <h1>{{ notebook.name }}</h1>
+  <table style="width:100%">
+    <tr>
+      <th>Note Title</th>
+      <th>Date Added</th>
+      <th>Delete Note</th>
+    </tr>
+{% for note in notes %}
+{% if note.course_id == notebook.id %}
+<tr>
+  <td>
+     <a href="note/{{note.id}}">{{ note.title }}</a>
+  </td>
+  <td>
+    <p>{{note.date_added}}</p>
+  </td>
+  <td>
+    <a href='#' class="btn btn-danger" onclick="confirmUser({{note.id}})">Delete</a>
+  </td>
+</tr>
+
+{% endif %}
+{% endfor%}
+
+</table>
+{% endfor %}
+</div>
+<script>
+    function confirmUser(id){
+        var ask=confirm("Are you sure? ");
+        if (ask){
+            window.location="/delete/"+id;
+        }
+    }
+</script>
+
+{% endblock%}

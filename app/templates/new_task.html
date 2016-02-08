@@ -1,0 +1,18 @@
+{% extends "base.html"%}
+{% block content %}
+<div class="container">
+<form role="form" action='' method=post>
+  <h2 class="text-center">New Task</h2>
+  <div class="form-group">
+      <input class="form-control" type='text' id='title 'name='title' placeholder="Enter title" value="{{ request.form.title }}" required>
+   <div> 
+    <textarea class="form-control" type='text' id='description' name='description' placeholder="Enter Description" value="{{ request.form.description }}" required></textarea>
+  </div>
+  <input class="form-control" type="date" name="date_due"></input>
+  </div>
+
+
+  <button type='submit' >save</button>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html"%}
+{% block content %}
+<script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script></script>
+<div class="container">
+  <h1>{{note.title}}</h1>
+  <section>
+    {{note.notes|safe}}
+  </section>
+<form action='' method=post>
+  <h2>Edit Key Points</h2>
+  <div> 
+    <textarea type='text' id='key_point' name='key_point' placeholder="Enter notes" value="{{ request.form.key_point }}" required>{{ note.key_point | safe }}</textarea>
+  </div>
+    <button type='submit' >save</button>
+</form>
+
+</div>
+<script>
+    CKEDITOR.replace('key_point');
+</script>
+
+{% endblock %}

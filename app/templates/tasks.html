@@ -1,0 +1,60 @@
+<div class="jumbotron">
+  <h2  class="text-center">To-Do</h2>
+  <ul id="tasks" style="list-style-type: none;">
+    {% for task in tasks %}
+    <li>
+      {% if task.is_done %}
+      <del>{% endif %}
+        <div class="text-center">
+          <p id="tasks{{task.id}}" >
+            {{ task.title }} |
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#desc{{task.id}}">
+              Description
+            </button>
+            | {{task.date_due.strftime('%Y-%m-%d')}}
+            <a class="btn btn-warning btn-sm" {% if task.is_done %} href="/not_done/{{task.id}}">Not Done {% else %} href="/done/{{task.id}}">Done {% endif %} </a>
+            <a class="btn btn-danger btn-sm" href="#" onclick="confirmDelete({{task.id}})">Delete</a>
+        </p>
+        </div>
+        {% if task.is_done %}
+      </del>
+      {% endif %}
+    </li>
+
+
+        <div class="modal fade" id="desc{{task.id}}" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+              <h4 class="modal-title">
+                Description
+              </h4>
+            </div>
+            <div class="modal-body">
+              <p>{{task.description}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+    <li>
+      <div class="text-center">
+        <a class="btn btn-success btn-sm" href="/new_task">Add Task</a>
+      </div>
+    </li>
+  </ul>
+</div>
+<script>
+    function confirmDelete(id){
+        var ask=confirm("Are you sure? ");
+        if (ask){
+            window.location="/delete_task/"+id;
+        }
+    }
+</script>

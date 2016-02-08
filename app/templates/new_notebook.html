@@ -1,0 +1,12 @@
+{% extends "base.html"%}
+{% block content %}
+<div class="container">
+<form role="form" action='' method=post>
+  <h2 class="text-center">New Notebook</h2>
+  <div class="form-group">
+      <input class="form-control" type='text' id='name 'name='name' placeholder="Enter notebook name" value="{{ request.form.name }}" required>
+  </div>
+  <button type='submit' >save</button>
+</form>
+</div>
+{% endblock %}

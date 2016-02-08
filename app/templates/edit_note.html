@@ -1,0 +1,29 @@
+{% extends "base.html"%}
+{% block content %}
+<script src="//cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script></script>
+<div class="container">
+<form action='' method=post>
+  <h2>New Note</h2>
+  <div>
+    <div>
+      <input class="form-control" type='text' id='title 'name='title' placeholder="Enter title" value="{{ note.title | safe}}" required>
+    </div>
+  </div>
+  <select class="form-control" name="notebook" id ="notebook">
+        {% for notebook in notebooks %}
+        <option  value="{{ notebook.id }}">{{ notebook.name }}</option>
+              {% endfor %}
+  </select>
+
+  <div> 
+    <textarea type='text' id='notes' name='notes' placeholder="Enter notes" value="{{ request.form.notes }}" required>{{ note.notes | safe }}</textarea>
+  </div>
+    <button type='submit' >save</button>
+</form>
+
+</div>
+<script>
+    CKEDITOR.replace('notes');
+</script>
+
+{% endblock %}
